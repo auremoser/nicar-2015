@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML Template | CartoDB</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+
+    <style>
+      html, body, #map {
+        height: 100%;
+        padding: 0;
+        margin: 0;
+      }
+    </style>
+    <!-- SQL for a PostGIS fusion of three layers -->
+    <script type='sql/text' id='sql'>
+      SELECT
+      cartodb_id, the_geom,
+        the_geom_webmercator,
+        county_name,
+        (SELECT number_fatality/population AS accidents_per_capita)
+      FROM percapita_merge
+    </script>
+
+    <!-- STYLE for your percapita choropleth, layer 2 (actually 3) -->
+    <style type='cartocss/text' id='choropleth'>
+    /** choropleth visualization */
+    #percapita_merge{
+      polygon-fill: #F1E6F1;
+      polygon-opacity: 0.8;
+      line-color: #FFF;
+      line-width: 1;
+      line-opacity: 1;
+    }
+    #percapita_merge [ accidents_per_capita <= 0.0011648223645894] {
+       polygon-fill: #8A4E8A;
+    }
+    #percapita_merge [ accidents_per_capita <= 0.000434522839606757] {
+       polygon-fill: #A05AA0;
+    }
+    #percapita_merge [ accidents_per_capita <= 0.000345685840707965] {
+       polygon-fill: #B379B3;
+    }
+    #percapita_merge [ accidents_per_capita <= 0.000272727272727273] {
+       polygon-fill: #C08FC0;
+    }
+    #percapita_merge [ accidents_per_capita <= 0.000212074084546868] {
+       polygon-fill: #CCA5CC;
+    }
+    #percapita_merge [ accidents_per_capita <= 0.000167128259001051] {
+       polygon-fill: #D8BBD8;
+    }
+    #percapita_merge [ accidents_per_capita <= 0.000123350191192796] {
+       polygon-fill: #F1E6F1;
+    }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <!-- include cartodb.js library -->
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+
+    <!-- place your code betwee the script tags below -->
+    <script src="main.js"></script>
+  </body>
+</html>

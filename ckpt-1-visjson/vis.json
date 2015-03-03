@@ -1,0 +1,195 @@
+{
+  "id": "ed78c85e-c11b-11e4-ab66-0e853d047bba",
+  "version": "0.1.0",
+  "title": "nicar-atl",
+  "likes": 0,
+  "description": null,
+  "scrollwheel": false,
+  "legends": true,
+  "url": null,
+  "map_provider": "leaflet",
+  "bounds": [
+    [
+      32.189559980413584,
+      -87.6104736328125
+    ],
+    [
+      35.380092992092145,
+      -78.8214111328125
+    ]
+  ],
+  "center": "[33.799691173251105, -83.2159423828125]",
+  "zoom": 8,
+  "updated_at": "2015-03-02T20:37:22+00:00",
+  "layers": [
+    {
+      "options": {
+        "visible": true,
+        "type": "Tiled",
+        "urlTemplate": "http://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}.png",
+        "subdomains": "1234",
+        "name": "Positron",
+        "className": "positron_rainbow",
+        "attribution": "\u00a9 <a href=\"http://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors \u00a9 <a href=\"http://cartodb.com/attributions#basemaps\">CartoDB</a>"
+      },
+      "infowindow": null,
+      "tooltip": null,
+      "id": "075586f5-9ee0-43cf-8d12-29bf975bc871",
+      "order": 0,
+      "parent_id": null,
+      "children": [
+
+      ],
+      "type": "tiled"
+    },
+    {
+      "type": "namedmap",
+      "order": 1,
+      "options": {
+        "type": "namedmap",
+        "user_name": "aureliamoser",
+        "tiler_protocol": "http",
+        "tiler_domain": "cartodb.com",
+        "tiler_port": "80",
+        "cdn_url": {
+          "http": "api.cartocdn.com",
+          "https": "cartocdn.global.ssl.fastly.net"
+        },
+        "dynamic_cdn": false,
+        "named_map": {
+          "name": "tpl_ed78c85e_c11b_11e4_ab66_0e853d047bba",
+          "stat_tag": "ed78c85e-c11b-11e4-ab66-0e853d047bba",
+          "params": {
+            "layer0": 1
+          },
+          "layers": [
+            {
+              "layer_name": "atl_census_demo_2010",
+              "interactivity": "cartodb_id",
+              "visible": true,
+              "legend": {
+                "type": "choropleth",
+                "show_title": false,
+                "title": "",
+                "template": "",
+                "items": [
+                  {
+                    "name": "Left label",
+                    "visible": true,
+                    "value": "8930.00",
+                    "type": "text"
+                  },
+                  {
+                    "name": "Right label",
+                    "visible": true,
+                    "value": "920581.00",
+                    "type": "text"
+                  },
+                  {
+                    "name": "Color",
+                    "visible": true,
+                    "value": "#FFFFB2",
+                    "type": "color"
+                  },
+                  {
+                    "name": "Color",
+                    "visible": true,
+                    "value": "#FED976",
+                    "type": "color"
+                  },
+                  {
+                    "name": "Color",
+                    "visible": true,
+                    "value": "#FEB24C",
+                    "type": "color"
+                  },
+                  {
+                    "name": "Color",
+                    "visible": true,
+                    "value": "#FD8D3C",
+                    "type": "color"
+                  },
+                  {
+                    "name": "Color",
+                    "visible": true,
+                    "value": "#FC4E2A",
+                    "type": "color"
+                  },
+                  {
+                    "name": "Color",
+                    "visible": true,
+                    "value": "#E31A1C",
+                    "type": "color"
+                  },
+                  {
+                    "name": "Color",
+                    "visible": true,
+                    "value": "#B10026",
+                    "type": "color"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "overlays": [
+    {
+      "type": "share",
+      "order": 2,
+      "options": {
+        "display": true,
+        "x": 20,
+        "y": 20
+      },
+      "template": ""
+    },
+    {
+      "type": "search",
+      "order": 3,
+      "options": {
+        "display": true,
+        "x": 60,
+        "y": 20
+      },
+      "template": ""
+    },
+    {
+      "type": "zoom",
+      "order": 6,
+      "options": {
+        "display": true,
+        "x": 20,
+        "y": 20
+      },
+      "template": "<a href=\"#zoom_in\" class=\"zoom_in\">+</a> <a href=\"#zoom_out\" class=\"zoom_out\">-</a>"
+    },
+    {
+      "type": "loader",
+      "order": 8,
+      "options": {
+        "display": true,
+        "x": 20,
+        "y": 150
+      },
+      "template": "<div class=\"loader\" original-title=\"\"></div>"
+    },
+    {
+      "type": "logo",
+      "order": 9,
+      "options": {
+        "display": true,
+        "x": 10,
+        "y": 40
+      },
+      "template": ""
+    }
+  ],
+  "prev": null,
+  "next": null,
+  "transition_options": {
+    "time": 0
+  }
+}
