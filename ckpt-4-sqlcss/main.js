@@ -17,7 +17,7 @@ window.onload = function () {
        zoom: 7 // zoom projection to adjust starting point zoom
    });
 
-   // sdd basemap tiles
+   // add basemap tiles
    L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
        attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
    }).addTo(mapObj);
@@ -29,8 +29,7 @@ window.onload = function () {
            console.log("Map successfully created.");
            sublayers[0] = layer.getSubLayer(0);
            sublayers[1] = layer.getSubLayer(1);
-           sublayers[2] = layer.getSubLayer(2);
-           // sublayers[2].set(options); // altering the SQL and CartoCSS; see above
+           sublayers[0].set(options); // altering the SQL and CartoCSS; see above
            sublayers[1].hide(); // hiding the traffic data
        })
        .error(function(err) {
