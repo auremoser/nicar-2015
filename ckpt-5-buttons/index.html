@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HTML Template | CartoDB</title>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <link rel="shortcut icon" href="http://cartodb.com/assets/favicon.ico" />
+
+    <link rel="stylesheet" href="http://libs.cartocdn.com/cartodb.js/v3/themes/css/cartodb.css" />
+
+    <style type="text/css">
+      html, body, #map {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #cartocss {
+        position: absolute;
+        right: 20px;
+        top: 20px;
+      }
+      #sql {
+        position: absolute;
+        right: 292px;
+        top: 20px;
+      }
+      .layer_selector {
+        background: rgba(255,255,255,0.9);
+        border: 1px solid #999;
+        border-radius: 5px;
+        font-family: 'Unica One', sans-serif;
+        font-size: 13px;
+        padding: 0;
+        text-align: center;
+        width: 250px;
+      }
+      .layer_selector > p {
+        border-bottom: 1px solid #999;
+        padding: 5px 10px;
+        text-transform: uppercase;
+      }
+      .layer_selector ul {
+        padding: 0; margin: 0;
+        list-style-type: none;
+      }
+      .layer_selector li {
+        color: #444;
+        cursor: pointer;
+        padding: 10px 20px;
+      }
+      .layer_selector li:not(:last-child) {
+        border-bottom: 1px solid #999;
+      }
+      .layer_selector li:hover {
+        background-color: #a8ddb5;
+        cursor: pointer;
+      }
+      .layer_selector li.selected {
+        background-color: #7bccc4;
+      }
+</style>
+
+    <!-- SQL for a PostGIS fusion of two layers -->
+    <script type='sql/text' id='sql'>
+      SELECT ac.the_geom_webmercator, ta.county_name, 100000 * ta.number_fatality / ac.population fatalities_per_capita
+      FROM
+        traffic_accidents ta, atl_census_demo_2010 ac
+      WHERE ac.county_name = ta.county_name
+    </script>
+
+    <!-- style for your simple vis -->
+    <style type='cartocss/text' id='simple'>
+      /** simple visualization */
+      #atl_census_demo_2010{
+        polygon-fill: #0fa59f;
+        polygon-opacity: 0.7;
+        line-color: #FFF;
+        line-width: 1;
+        line-opacity: 1;
+    }
+    </style>
+    <!-- style for your choropleth - fatalites per 100,000 ppl -->
+    <style type='cartocss/text' id='choropleth'>
+      /** choropleth visualization */
+      #atl_census_demo_2010{
+        polygon-fill: #0fa59f;
+        polygon-opacity: 0.8;
+        line-color: #FFF;
+        line-width: 0.5;
+        line-opacity: 1;
+      }
+      #atl_census_demo_2010 [ fatalities_per_capita <= 116.48223645894] {
+         polygon-fill: #f0f9e8;
+      }
+      #atl_census_demo_2010 [ fatalities_per_capita <= 43.4522839606757] {
+         polygon-fill: #ccebc5;
+      }
+      #atl_census_demo_2010 [ fatalities_per_capita <= 34.5685840707965] {
+         polygon-fill: #a8ddb5;
+      }
+      #atl_census_demo_2010 [ fatalities_per_capita <= 27.2727272727273] {
+         polygon-fill: #7bccc4;
+      }
+      #atl_census_demo_2010 [ fatalities_per_capita <= 21.2074084546868] {
+         polygon-fill: #4eb3d3;
+      }
+      #atl_census_demo_2010 [ fatalities_per_capita <= 16.7128259001051] {
+         polygon-fill: #2b8cbe;
+      }
+      #atl_census_demo_2010 [ fatalities_per_capita <= 12.3350191192796] {
+         polygon-fill: #08589e;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <!-- add layer selector buttons -->
+    <div id="cartocss" class="layer_selector">
+        <p>Buttons</p>
+        <ul>
+            <li data="choropleth">Fatality Choropleth Per Capita</li>
+            <li data="simple">Simple County Map</li>
+        </ul>
+    </div>
+
+    <!-- include cartodb.js library -->
+    <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
+
+    <!-- place your code betwee the script tags below -->
+    <script src="main.js"></script>
+  </body>
+</html>
