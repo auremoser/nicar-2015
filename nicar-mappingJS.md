@@ -36,9 +36,8 @@ Github: <https://github.com/auremoser/nicar-test/>
 	+ Quick map with `CreateVis` ([ckpt-1](https://github.com/auremoser/nicar-test/tree/master/ckpt-1-visjson))
 	+ Custom map with `CreateLayer` ([ckpt-2](https://github.com/auremoser/nicar-test/tree/master/ckpt-2-createVis))
 	+ Add SQL/CSS Templates [(ckpt-3](https://github.com/auremoser/nicar-test/tree/master/ckpt-3-createLayer))
-	+ Add Interactivity - Buttons/ ([ckpt-4](https://github.com/auremoser/nicar-test/tree/master/ckpt-4-sqlcss)) 
+	+ Add Interactivity - Buttons ([ckpt-4](https://github.com/auremoser/nicar-test/tree/master/ckpt-4-sqlcss)) 
 	+ Infowindows ([ckpt-5]())
-	+ Bonus: Add charts!
 5. Building a Narrative
 	+ Case Study: ATL - Onomatopeoia Map
 	+ [CrashPop_Demo](http://bl.ocks.org/auremoser/)
@@ -264,8 +263,9 @@ You will need:
 + Basic Text Editor
 + Browser
 
-You can open HTML files on your hard drive from a browser. Use CMD+O or CTRL+O like you'd do to open a file in any program.
-You can also run a little server by navigating to the folder where you will store your files and running `http-server &`; you have
+#### Running Locally
+* You can open HTML files on your hard drive from a browser. Use CMD+O or CTRL+O like you'd do to open a file in any program.
+* You can also run a little server by navigating to the folder where you will store your files and running `http-server &`; you have
 
 ###VisJson
 The viz.json file is the main source of data for CartoDB JavaScript functions (createVis and createLayer) for creating visualizations in the browser.
@@ -285,25 +285,285 @@ The viz.json file is the main source of data for CartoDB JavaScript functions (c
 
 You can view it by opening a text editor and loading the file, or downloading a JSON viewer extension for inbrowser views ([Chrome](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en) or [Firefox](https://addons.mozilla.org/en-us/firefox/addon/jsonview/)).
 
+### Creating Basic Visualization in JavaScript
 
+Copy &amp; paste template from [here](https://gist.github.com/auremoser/a57654e18ce06ab396d6).
 
-[HTML template here](https://gist.github.com/auremoser/a57654e18ce06ab396d6)
+Overview of template:
+
+1. Included JavaScript libraries and CSS file
+2. `map` element
+3. `<script>` tags
+
+Create basic visualization using createVis (docs here) by copying and pasting the following:
+
+```js
+window.onload = function() {
+    var vizjson_url = ''; // <-- Paste viz.json URL between quotes
+
+    cartodb.createVis(map_id, vizjson_url) // <-- Change map_id to 'map'
+        .done(function(vis, layers) {
+            // do stuff
+            console.log("Map successfully created");
+        })
+        .error(function(err) {
+            // report error
+            console.log("An error occurred: " + err);
+        });
+}
+```
+
+`createVis` is excellent for creating maps quickly with very little code. There is a lot of customization with it as well. The documentation is [here](http://docs.cartodb.com/cartodb-platform/cartodb-js.html#visualization).
+
+![createVis](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/0-ckpt-creatVis.png)
+
+**Edit the fields to match your map reload your browser window, your map should work.**
 
 ## Custom map with `CreateLayer`
 #### Here's a reference point for this section: [ckpt-2](https://github.com/auremoser/nicar-test/tree/master/ckpt-2-createVis)
+
+`createLayer` is the other main method for bring maps to your browser.
+
+The following is the basic createLayer structure (depends on [Leaflet.js](http://leafletjs.com/)):
+
+```js
+window.onload = function () {
+  //
+   var layerSource = 'http://documentation.cartodb.com/api/v2/viz/ed78c85e-c11b-11e4-ab66-0e853d047bba/viz.json'; // add your url ID here between viz/ and /viz.json
+
+   var options = {
+       sql: "SELECT * FROM atl_census_demo_2010",
+       cartocss: "#atl_census_demo_2010{polygon-fill:#0fa59f;}"
+   }
+
+   var sublayers = [];
+
+   // instantiate map object from Leaflet
+   var mapObj = new L.Map(map, {  // <-- Replace map_id with your #id for rendering
+       center: [31.7550, -84.3900], // Atlanta, Georgia
+       zoom: 7 // zoom projection to adjust starting point zoom
+   });
+
+   // add basemap tiles
+   L.tileLayer('http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png', {
+       attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+   }).addTo(mapObj);
+
+   // add data tile layer
+   cartodb.createLayer(mapObj,layerSource)
+       .addTo(mapObj)
+       .done(function(layer) {
+           console.log("Map successfully created.");
+           sublayers[0] = layer.getSubLayer(0);
+           sublayers[1] = layer.getSubLayer(1);
+           sublayers[0].set(options); // altering the SQL and CartoCSS; see above
+           sublayers[1].hide(); // hiding the traffic data
+       })
+       .error(function(err) {
+           console.log("Map not created: " + err);
+       });
+}
+```
+One big difference here is that we explicitly expose the SQL and CartoCSS, allowing for easy customization.
+
+![createLayer](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/0-ckpt-creatLayer.png)
+
+**Edit the fields to match your map reload your browser window, your map should work.**
  
 ## Add SQL/CSS Templates
 #### Here's a reference point for this section: [ckpt-3](https://github.com/auremoser/nicar-test/tree/master/ckpt-3-createLayer)
 
+**New goal:** We'll create an interactive map that allows us to toggle between the basic view and the view of crashes per county per capita.
+
+To accomplish this, we need to know how many crashes happened per neighborhood, then divide that number by the population of the neighborhood.
+
+You can do this a number of ways, we'll be using SQL, you can read documentation on this in the [PostGIS docs](http://postgis.net/docs/) and otherwise just follow along.
+
+Going back to the createLayer example we just made:
+
+* Copy the following SQL into your index.html file below the `<style>` tags.
+
+```sql
+<script type='sql/text' id='sql'>
+      SELECT ac.the_geom_webmercator, ac.population, ta.county_name, ceil(100000 * ta. number_crash / ac. population) crashes_per_capita, ceil(100000 * ta.number_fatality / ac.population) fatalities_per_capita
+      FROM
+        traffic_accidents ta, atl_census_demo_2010 ac
+      WHERE ac.county_name = ta.county_name
+</script>
+```
+
+* Paste the following CartoCSS structure in the `<head>` section of your webpage.
+    This is a pre-configured Choropleth style. You could also create one on the fly by calculating the range in data and creating bins within that range.
+
+```css
+<style type='cartocss/text' id='choropleth'>
+    /** choropleth visualization */
+    #atl_census_demo_2010{
+      polygon-fill: #F1E6F1;
+      polygon-opacity: 0.8;
+      line-color: #FFF;
+      line-width: 0.5;
+      line-opacity: 1;
+    }
+    #atl_census_demo_2010 [ fatalities_per_capita <= 116.48223645894] {
+       polygon-fill: #8A4E8A;
+    }
+    #atl_census_demo_2010 [ fatalities_per_capita <= 43.4522839606757] {
+       polygon-fill: #A05AA0;
+    }
+    #atl_census_demo_2010 [ fatalities_per_capita <= 34.5685840707965] {
+       polygon-fill: #B379B3;
+    }
+    #atl_census_demo_2010 [ fatalities_per_capita <= 27.2727272727273] {
+       polygon-fill: #C08FC0;
+    }
+    #atl_census_demo_2010 [ fatalities_per_capita <= 21.2074084546868] {
+       polygon-fill: #CCA5CC;
+    }
+    #atl_census_demo_2010 [ fatalities_per_capita <= 16.7128259001051] {
+       polygon-fill: #D8BBD8;
+    }
+    #atl_census_demo_2010 [ fatalities_per_capita <= 12.3350191192796] {
+       polygon-fill: #F1E6F1;
+    }
+</style>
+```
+
+* Next replace the string for `sql in the options object with 
+
+```js
+$("#sql").text(),
+```
+
+(don't forget the comma!), and the string after `cartocss` with
+
+```js
+$("#choropleth").text()
+```
+
+These two pieces of code are just a jQuery operation that finds the HTML element that has an `id` of `sql` or `cartocss` and extracts the text contained within it.
+
+* add a sublayer reference to your data tile layer function at the end of your js:
+
+`sublayers[0].set(options); // altering the SQL and CartoCSS; see above`
+
+Check [the checkpoint code](https://github.com/auremoser/nicar-test/tree/master/ckpt-4-sqlcss) here if you're stuck.
+
+**Reload your browser window, your map should work**
+
+
 ## Add Interactivity - Buttons 
 #### Here's a reference point for this section: [ckpt-4](https://github.com/auremoser/nicar-test/tree/master/ckpt-4-sqlcss)
- 
-	+ Infowindows ([ckpt-5]()
-	+ Bonus: Add charts!
-# Building Narrative
 
-## Case Study: ATL - Onomatopeoia Map
-[CrashPop_Demo](http://bl.ocks.org/auremoser/)
+To add more interactivity, we'll create two buttons to toggle between the `Simple` map view and the view that gives a choropleth map. We can easily do this in CartoDB by using the `sublayer.setSQL()` and `sublayer.setCartoCSS()` methods to change the data.
+
+First, create another `<style type="cartocss/text" id="simple">` tag set with the following CartoCSS style. Make sure the `id` is set to `simple`
+
+```css
+      /** simple visualization */
+      #atl_census_demo_2010{
+        polygon-fill: #0fa59f;
+        polygon-opacity: 0.7;
+        line-color: #FFF;
+        line-width: 1;
+        line-opacity: 1;
+    }
+```
+
+* Next, let's create some buttons. Put the following snippet below the `div` with an `id='map'`.
+
+```html
+<div id="cartocss" class="layer_selector">
+        <p>Buttons</p>
+        <ul>
+            <li data="choropleth">Fatality Choropleth Per Capita</li>
+            <li data="simple">Simple County Map</li>
+        </ul>
+</div>
+```
+
+* Wire up the buttons with click events:
+
+```js
+function createSelector(layer) {
+      var cartocss = "";
+      var $options = $(".layer_selector").find("li");
+      $options.click(function(e) {
+          var $li = $(e.target);
+          var selected = $li.attr('data');
+
+          $options.removeClass('selected');
+          $li.addClass('selected');
+
+          cartocss = $('#'+selected).text();
+
+          layer[0].setCartoCSS(cartocss);
+      });
+   }
+```
+
+Helpful examples
++ [Interactivity tutorial](http://docs.cartodb.com/tutorials/custom_interactivity.html)
++ [Advanced example](http://byndhack.herokuapp.com/)
+
+ 
+## Infowindows + More 
+#### Here's a reference point for this section ([ckpt-5]()
+
+### Adding infowindows in Editor
+You can enable hover infowindows in your editor, that will port to your map and give you some choropleth context.
+
+![infowindows](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/infowindows.png)
+
+* customization in html/css
+* all data in your table is available to you to populate the tooltips
+
+### Adding infowindows in JS
+* HTML templates
+    * Handlebar notation
+    * Customizing display of information
+    * Pulling in images
+
+```html
+<script type="infowindow/html" id="infowindow_template">
+  <div class="cartodb-popup">
+    <a href="#close" class="cartodb-popup-close-button close">x</a>
+     <div class="cartodb-popup-content-wrapper">
+       <div class="cartodb-popup-header">
+         <img style="width: 100%" src="http://cartodb.com/assets/logos/logos_full_cartodb_light-5ef5e4ff558f4f8d178ab2c8faa231c1.png"></src>
+       </div>
+       <div class="cartodb-popup-content">
+         <!-- content.data contains the field info -->
+         <h4>County: </h4>
+         <p>{{content.data.county_name}}</p>
+       </div>
+     </div>
+     <div class="cartodb-popup-tip-container"></div>
+  </div>
+</script>
+```
+
+Then add this to the `options`:
+```js
+interactivity: 'cartodb_id, county_name'
+```
+
+After `sublayers[0].set(...)`, add this:
+
+```js
+sublayers[0].infowindow.set('template', $('#infowindow_template').html());
+```
+
+* Click events
+    * On hover
+    * On click
+
+You can build on this, or checkout the demo block here to view the result of your work with some limited interactivity!
+
+[Onomatopoeia (Crash/Pop) Map]()
+
+# Building Narrative
+Outside of the CartoJS library, we have others to help you build dynamic narrative with your data.
 
 ## Tell Time + Stories
 
@@ -359,10 +619,12 @@ Type | Title | Link/Demo | BlogPost
 	* Public vs. Private School distribution
 	* Development districts
 	Watershed management 
+	* Bike and Transport Data
+2. [ARC Census Data](http://arc.garc.opendata.arcgis.com/datasets/f37c6a6c451447f8af2693f736cd9044_12)
 
 
 My contact: [aurelia@cartodb.com](mailto:aurelia@cartodb.com)
 
 If you make a map you're proud of or just want to say hello, connect with me [@auremoser](https://twitter.com/auremoser)
 
-![GA Traffice](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/seal-ga.jpg)
+![GA-Seal](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/seal-ga.jpg)
