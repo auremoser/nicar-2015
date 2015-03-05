@@ -326,7 +326,7 @@ window.onload = function() {
 
 The following is the basic createLayer structure (depends on [Leaflet.js](http://leafletjs.com/)):
 
-```js
+```javascript
 window.onload = function () {
   //
    var layerSource = 'http://documentation.cartodb.com/api/v2/viz/ed78c85e-c11b-11e4-ab66-0e853d047bba/viz.json'; // add your url ID here between viz/ and /viz.json
@@ -431,13 +431,13 @@ Going back to the createLayer example we just made:
 
 * Next replace the string for `sql in the options object with 
 
-```js
+```javascript
 $("#sql").text(),
 ```
 
 (don't forget the comma!), and the string after `cartocss` with
 
-```js
+```javascript
 $("#choropleth").text()
 ```
 
@@ -544,13 +544,13 @@ You can enable hover infowindows in your editor, that will port to your map and 
 ```
 
 Then add this to the `options`:
-```js
+```javascript
 interactivity: 'cartodb_id, county_name'
 ```
 
 After `sublayers[0].set(...)`, add this:
 
-```js
+```javascript
 sublayers[0].infowindow.set('template', $('#infowindow_template').html());
 ```
 
