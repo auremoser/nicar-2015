@@ -53,18 +53,21 @@ Github: <https://github.com/auremoser/nicar-test/>
 
 ![Data import dialog](https://raw.githubusercontent.com/ohasselblad/workshops/master/img/common/data_import_dialog.png)
 
-![int-data]()
-![int-upload]()
-![int-vis]()
-![int-share]()
-
 # Intro to CartoDB
 ## Examples
 + [Global Forest Watch](http://www.globalforestwatch.org/map/3/15.00/27.00/ALL/grayscale/loss,forestgain?begin=2001-01-01&end=2013-12-31&threshold=30)
 + [Urban Reviewer](http://www.urbanreviewer.org/#map=12/40.7400/-73.9998&sidebar=plans)
 
 ## Tour of the interface
+![int-data](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/int-data.jpg)
+![int-upload](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/int-upload.jpg)
+![int-vis](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/int-vis.jpg)
+![int-share](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/int-share.jpg)
 ## APIs / JS Libs
+* [CartoJS](http://docs.cartodb.com/cartodb-platform/cartodb-js.html) - JS library for interacting with CartoDB
+* [Maps API](http://docs.cartodb.com/cartodb-platform/maps-api.html) - generate public/private maps with data hosted on your CDB account
+* [SQL API](http://docs.cartodb.com/cartodb-platform/sql-api.html) - run sql in your code that dynamically filters/affects/queries your mapped data stored in CartoDB
+* [Import API](http://docs.cartodb.com/cartodb-platform/import-api.html) - CRUD files in your CartoDB Account
 
 # Mapping Basics
 ## Setting Up Accounts
@@ -251,8 +254,38 @@ Choropleth maps show map elements colored according to where a value associated 
 * **_Equal interval_** gives bins of equal size across the range,  which means that outliers stand out.
 * **_Quantile_** bins so that each quantile has approximately the same number of values.
 
+
 ## Quick map with `CreateVis`
 #### Here's a reference point for this section: [ckpt-1](https://github.com/auremoser/nicar-test/tree/master/ckpt-1-visjson)
+
+You will need:
++ datasets from above
++ visjson from your account, you can [reference mine](https://github.com/auremoser/nicar-test/blob/master/ckpt-1-visjson/vis.json) to find yours too.
++ Basic Text Editor
++ Browser
+
+You can open HTML files on your hard drive from a browser. Use CMD+O or CTRL+O like you'd do to open a file in any program.
+You can also run a little server by navigating to the folder where you will store your files and running `http-server &`; you have
+
+###VisJson
+The viz.json file is the main source of data for CartoDB JavaScript functions (createVis and createLayer) for creating visualizations in the browser.
+
+![visjson](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/1-visJson.png)
+
+* Structure of file: JSON
+* Defines how to access data: listing servers, subdomains, etc.
+* Most important for developers is the `layers` array because it explicitly shows the structure of how visualizations are put together
+    * Defines base maps, if applicable, as `layers[0]`
+    * CartoDB data layer is `layers[1]`, may consist of multiple sublayers
+        * Defines infowindows, which we'll cover in this workshop
+        * Defines data accessed by using a SQL statement
+        * Defines styling for tile layers, if applicable
+        * Defines interactivity (what data shows up on layer events)
+        * `layer_name` is the also the name of table where data comes from in the account with key `user_name`
+
+You can view it by opening a text editor and loading the file, or downloading a JSON viewer extension for inbrowser views ([Chrome](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc?hl=en) or [Firefox](https://addons.mozilla.org/en-us/firefox/addon/jsonview/)).
+
+
 
 [HTML template here](https://gist.github.com/auremoser/a57654e18ce06ab396d6)
 
