@@ -72,6 +72,8 @@ Github: <https://github.com/auremoser/nicar-test/>
 ## Setting Up Accounts
 You can setup a _free_ student account today since we're all learning: <https://cartodb.com/signup?plan=academy>
 
+![Problem](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/ire.png)
+
 IRE members are eligible for a free upgraded account that includes:
 
 * more space
