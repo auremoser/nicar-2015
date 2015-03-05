@@ -106,4 +106,4 @@ My contact: [aurelia@cartodb.com](mailto:aurelia@cartodb.com)
 
 If you make a map you're proud of or just want to say hello, connect with me [@auremoser](https://twitter.com/auremoser)
 
-![GA Traffice](https://raw.githubusercontent.com/auremoser/images/master/lrs.jpg)
+![GA Traffice](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/seal-ga.jpg)
