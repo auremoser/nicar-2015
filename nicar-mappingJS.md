@@ -7,6 +7,9 @@ Workshop - NICAR Session [Link](http://ire.org/events-and-training/event/1494/16
 Find this document here: 
 Stackedit: <>
 Gist: <>
+Find the code checkpoints here:
+
+Github: <>
 
 ![Atlanta Flag from Wikipedia](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/flag-ga.png)
 
@@ -27,16 +30,17 @@ Gist: <>
 	+ Geocoding + SQL/PostGIS
 	+ Customizing UI
 4. Building a Map
-	+ Quick map with `CreateVis` [ckpt-1]()
-	+ Custom map with `CreateLayer` [ckpt-2]()
-	+ Add Interactivity - SQL/CSS [ckpt-3]()
-	+ Add Interactivity - Buttons/ [ckpt-4]() Infowindows [ckpt-5]()
+	+ Quick map with `CreateVis` ([ckpt-1](https://github.com/auremoser/nicar-test/tree/master/ckpt-1-visjson))
+	+ Custom map with `CreateLayer` ([ckpt-2](https://github.com/auremoser/nicar-test/tree/master/ckpt-2-createVis))
+	+ Add Interactivity - SQL/CSS [(ckpt-3](https://github.com/auremoser/nicar-test/tree/master/ckpt-3-createLayer))
+	+ Add Interactivity - Buttons/ ([ckpt-4](https://github.com/auremoser/nicar-test/tree/master/ckpt-4-sqlcss)) 
+	+ Infowindows ([ckpt-5]())
 	+ Bonus: Add charts!
 5. Building a Narrative
 	+ Case Study: ATL - Onomatopeoia Map
 	+ [CrashPop_Demo](http://bl.ocks.org/auremoser/)
-	+ Odyssey + Torque: Tell Time + Stories
-	+ Graphs + Charts
+	+ Tell Time/Stories: Odyssey + Torque
+	+ Datatelling: Graphs + Charts
 6. Wrap-Up and Resources
 
 # Visualizing Data
@@ -48,16 +52,20 @@ You can setup a _free_ student account today since we're all learning: <https://
 IRE members are eligible for a free upgraded account that includes:
 
 * more space
-* private tables (a Magellan account feature)
+* private tables ([a Magellan account feature](http://cartodb.com/pricing))
 * sync tables 
 
-Email <> with your request for an account and IRE member info, and we'll get you setup. 
-
+Email <cometdocs@ire.org> with your request for an upgraded CartoDB account and IRE member info, and we'll get you setup!
 
 ## Data Import
+We're going to be building a visualization of traffic accidents in Georgia.
+
+We'll be mapping crash/fatalities from motor accidents (c. 2006) and census population data from 2010 for a Crash/Pop map (what I've called an "onomatopoeia map," [just because](http://www.noisehelp.com/examples-of-onomatopoeia.html)).
+
+![Problem](https://raw.githubusercontent.com/auremoser/nicar-test/master/trafficTweet.png)
+
 ## Datasets
 You can download the datasets we'll be working with, and the files for the workshop here.
-
 
 Description | Source | Download | Dropbox
 ------------ | ------------- | ------------
