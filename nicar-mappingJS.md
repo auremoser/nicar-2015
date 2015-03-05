@@ -2,14 +2,16 @@
 
 Aurelia Moser, Map Scientist, [CartoDB](http://cartodb.com)
 Workshop - NICAR Session [Link](http://ire.org/events-and-training/event/1494/1646/)
+
 **March 6, 2015, 3:20PM-4:20PM**
 
 Find this document here: 
 Stackedit: <>
-Gist: <>
+Gist: <https://github.com/auremoser/nicar-test/blob/master/nicar-mappingJS.md>
+
 Find the code checkpoints here:
 
-Github: <>
+Github: <https://github.com/auremoser/nicar-test/>
 
 ![Atlanta Flag from Wikipedia](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/flag-ga.png)
 
@@ -24,15 +26,16 @@ Github: <>
 	+ Setting up accounts!
   	+ Data import
 	+ Datasets
-3. Mapping **Data** with Javascript
+3. Mapping **Data**
 	+ Getting Geospatial Data
   	+ Data representation in CartoDB (SQL schema)
 	+ Geocoding + SQL/PostGIS
+	+ Merging Tables
 	+ Customizing UI
 4. Building a Map
 	+ Quick map with `CreateVis` ([ckpt-1](https://github.com/auremoser/nicar-test/tree/master/ckpt-1-visjson))
 	+ Custom map with `CreateLayer` ([ckpt-2](https://github.com/auremoser/nicar-test/tree/master/ckpt-2-createVis))
-	+ Add Interactivity - SQL/CSS [(ckpt-3](https://github.com/auremoser/nicar-test/tree/master/ckpt-3-createLayer))
+	+ Add SQL/CSS Templates [(ckpt-3](https://github.com/auremoser/nicar-test/tree/master/ckpt-3-createLayer))
 	+ Add Interactivity - Buttons/ ([ckpt-4](https://github.com/auremoser/nicar-test/tree/master/ckpt-4-sqlcss)) 
 	+ Infowindows ([ckpt-5]())
 	+ Bonus: Add charts!
@@ -44,7 +47,25 @@ Github: <>
 6. Wrap-Up and Resources
 
 # Visualizing Data
+![Types of Visualizations](https://raw.githubusercontent.com/auremoser/images/master/1-vis-types.png)
+
+[**CartoDB**](cartodb.com) is a light open source library and graphical user interface application for hosting and visualizing geospatial data.
+
+![Data import dialog](https://raw.githubusercontent.com/ohasselblad/workshops/master/img/common/data_import_dialog.png)
+
+![int-data]()
+![int-upload]()
+![int-vis]()
+![int-share]()
+
 # Intro to CartoDB
+## Examples
++ [Global Forest Watch](http://www.globalforestwatch.org/map/3/15.00/27.00/ALL/grayscale/loss,forestgain?begin=2001-01-01&end=2013-12-31&threshold=30)
++ [Urban Reviewer](http://www.urbanreviewer.org/#map=12/40.7400/-73.9998&sidebar=plans)
+
+## Tour of the interface
+## APIs / JS Libs
+
 # Mapping Basics
 ## Setting Up Accounts
 You can setup a _free_ student account today since we're all learning: <https://cartodb.com/signup?plan=academy>
@@ -74,7 +95,7 @@ Description | Source | Download | Dropbox
 2010 Georgia Census Demographics | [Atlanta Regional Data](http://www.atlantaregional.com/info-center/2010-census)  | [pop_2010s](https://www.dropbox.com/s/6j6j5vt616yq2ek/atl_census_demo_2010.geojson?dl=1) | [pop_2010s](https://www.dropbox.com/s/6j6j5vt616yq2ek/atl_census_demo_2010.geojson?dl=0)
 Traffic Fatality Data | [GA Office of Highway Safety](http://www.gahighwaysafety.org/research/data-by-county/)  | [crash_2006](https://www.dropbox.com/s/7rvrpkytll3bq1e/traffic_accidents.geojson?dl=1) | [crash_2006](https://www.dropbox.com/s/7rvrpkytll3bq1e/traffic_accidents.geojson?dl=0)
 
-# Mapping Data with JS
+# Mapping Data
 ## Getting Geospatial Data
 
 **Geospatial data** is info that ids a geolocation and its characteristic features/frontiers, typically represented by points, lines, polygons, and/or complex geographic features.
@@ -98,8 +119,8 @@ Downloading the [Traffic Data](http://www.gahighwaysafety.org/research/data-by-c
 
 The sets I've prepared should give you "cleaner" data. Here are the fields, or columns, we'll be focusing on:
 
-* Georgia Census Data - names of counties and population counts
-* Georgia Traffic Data - names of counties, crash counts, fatality counts (injury counts are also available)
+* **Georgia Census Data** - names of counties and population counts
+* **Georgia Traffic Data** - names of counties, crash counts, fatality counts (injury counts are also available)
 
 Here is what it might look like when you upload your data:
 
@@ -161,13 +182,96 @@ This is a query that adds some more information from the sample, to include perc
 ![sql](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/0-sql.png)
 
 You can enter queries, apply them, click on "create table from query" in the green field below the column names.
+
+## Merging Tables
+Joining and merging tables to make one dataset is a common need. Say you have two datasets related to the same place/map and need to combine them so that they can share the same geometry. 
+
+You can do this in SQL [read more here](http://docs.cartodb.com/tutorials/merging_data.html), but CartoDB also has an in-editor button for that.
+
+![mergeButton](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/5-mergeButton.png)
+
+Here is a usecase relative to these datasets:
+
+* when you download the traffic data from source, it has county names but no polygon or geospatial reference. 
+* [this dataset](https://www.dropbox.com/s/eyq2p1uzg2njifx/ga-counties.kml?dl=0) has polygon info for georgia counties, as well as a corresponding column of county names.
+* you can load them both into cartodb, and select the "merge tables" button
+* select `column` or `spatial` join
+
+![joins](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/5-joins.png)
+* select the columns that you want to join on, in this case, both datasets share a "county_name" column
+
+![merge](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/5-merge.png)
+* toggle the columns you want to exist in your new "joined" dataset
+
+![mergGen](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/mergeGen.png)
+
 ## Customizing UI
 Once you load both datasets, add them together as layers in the same visualization.
-* 
+
+* navigate to your census data, select `Add layer`, create a visualization when prompted (titled something like `nicar-atl` or whatever you'd like)
+
+![sql](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/0-wizard.png)
+
 You have myriad customization options in the in-browser editor.
 
-# Mapping Process
+* `sql` lets you run sql and postgis functions across your data
+* `wizard` lets you adjust the type, colors and fills in your map
+* `infowindow` lets you creat hovers, tooltips with information from your datatables
+* `css` allows you to customize the css and style of your map outside the wizard
+* `legends` allows you to creat keys for your map
+* `filters` allows you to filter the data without sql
+
+You can also select and change your `basemaps` in the upper left corner of your map.
+
+![Basemap options](https://raw.githubusercontent.com/ohasselblad/workshops/gh-pages/img/alaska/basemap_options.png)
+
+All of these options can be cloned in javascript!
+
+# Building a Map
+You can build any type of visualization that suits your data.
+
+#### Types of visualizations
++ **Simple** -- most basic visualization
++ **Cluster** -- counts number of points within a certain binned region
++ **Choropleth** -- makes a histogram of your data and gives bins different colors depending on the color ramp chosen
++ **Category** -- color data based on unique category (works best for a handful of unique types)
++ **Bubble** -- size markers based on column values
++ **Intensity** -- colors by density
++ **Density** -- data aggregated by number of points within a hexagon
++ **Torque** -- temporal visualization of data (categorical and heatmap versions)
+
+Check out [visualization documentation](http://docs.cartodb.com/cartodb-editor.html#wizards) for more.
+
+#### Choropleth
+We'll be making choropleths because we have county-level polygon data for Georgia.
+
+Choropleth maps show map elements colored according to where a value associated with the map element falls in a range. It's like a histogram where each bin is colored differently according to a color scale you pick. 
+
+* **_Quantification_** is an option to pay attention to since it controls how the data is binned into different colors.
+* **_Equal interval_** gives bins of equal size across the range,  which means that outliers stand out.
+* **_Quantile_** bins so that each quantile has approximately the same number of values.
+
+## Quick map with `CreateVis`
+#### Here's a reference point for this section: [ckpt-1](https://github.com/auremoser/nicar-test/tree/master/ckpt-1-visjson)
+
+[HTML template here](https://gist.github.com/auremoser/a57654e18ce06ab396d6)
+
+## Custom map with `CreateLayer`
+#### Here's a reference point for this section: [ckpt-2](https://github.com/auremoser/nicar-test/tree/master/ckpt-2-createVis)
+ 
+## Add SQL/CSS Templates
+#### Here's a reference point for this section: [ckpt-3](https://github.com/auremoser/nicar-test/tree/master/ckpt-3-createLayer)
+
+## Add Interactivity - Buttons 
+#### Here's a reference point for this section: [ckpt-4](https://github.com/auremoser/nicar-test/tree/master/ckpt-4-sqlcss)
+ 
+	+ Infowindows ([ckpt-5]()
+	+ Bonus: Add charts!
 # Building Narrative
+
+## Case Study: ATL - Onomatopeoia Map
+[CrashPop_Demo](http://bl.ocks.org/auremoser/)
+
 ## Tell Time + Stories
 
 **Maps that tell Time** - **[Torque](http://docs.cartodb.com/tutorials/introduction_torque.html)**
@@ -191,6 +295,19 @@ You have myriad customization options in the in-browser editor.
 
 
 ## Talk Data in Charts
+You can use CartoDB's SQL API to query your data and pull it into any charting library of your choosing.
+
+Learn more about it [here](http://docs.cartodb.com/tips-and-tricks.html#charts--graphs)
+
+Here are some examples:
+
+Type | Title | Link/Demo | BlogPost
+------------ | ------------- | ------------ 
+[Highcharts](http://www.highcharts.com/) | Sensor Data  | [Github](https://github.com/auremoser/VitalSigns-water/) / [Demo](http://auremoser.github.io/VitalSigns-water/)  | [MOW Post](http://blog.cartodb.com/map-of-the-week-pulse-plotting/)
+[Highcharts](http://www.highcharts.com/) | Weather Data | [Aurelia's Block](http://bl.ocks.org/auremoser/96b70f6dbcc724ecc973) | [Tutorial](https://stackedit.io/viewer#!provider=gist&gistId=e2d4f0f0b71f258f3ac9&filename=beirut.md)
+[Chart.js](http://www.chartjs.org/) Line Graph | Tornado Data  | [Andrew's Block](http://bl.ocks.org/andrewxhill/9134155) 
+[Chart.js](http://www.chartjs.org/) Bar Graph | Car Accidents Data| [Andy's Block](http://bl.ocks.org/ohasselblad/0320048cdba5b1c67903)
+[Plot.ly](https://plot.ly/) | Earthquake Data  | [Plotly Tutorial](https://plot.ly/ipython-notebooks/cartodb/) | [CartoDB Blog](http://blog.cartodb.com/plotly/)
 
 # Resources
 ##CartoDB
@@ -202,6 +319,14 @@ You have myriad customization options in the in-browser editor.
 4. [CartoDB APIs](http://docs.cartodb.com/cartodb-platform.html)
 5. [Community help on StackExchange](http://gis.stackexchange.com/questions/tagged/cartodb)
 6. [CartoDB Map Gallery](http://cartodb.com/gallery/)
+
+##Data
+1. [GIS Layer Data for Georgia](http://gis.atlantaga.gov/apps/gislayers/)
+	* Tax Allocation Districts
+	* Public vs. Private School distribution
+	* Development districts
+	Watershed management 
+
 
 My contact: [aurelia@cartodb.com](mailto:aurelia@cartodb.com)
 
