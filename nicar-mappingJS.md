@@ -8,7 +8,7 @@ Find this document here:
 Stackedit: <>
 Gist: <>
 
-![Atlanta Flag from Wikipedia](http://commons.wikimedia.org/wiki/File:Flag_of_Georgia_(U.S._state).svg#mediaviewer/File:Flag_of_Georgia_(U.S._state).svg)
+![Atlanta Flag from Wikipedia](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/flag-ga.png)
 
 # Outline
 0. Visualizing Data
@@ -101,3 +101,9 @@ Traffic Fatality Data | [GA Office of Highway Safety](http://www.gahighwaysafety
 4. [CartoDB APIs](http://docs.cartodb.com/cartodb-platform.html)
 5. [Community help on StackExchange](http://gis.stackexchange.com/questions/tagged/cartodb)
 6. [CartoDB Map Gallery](http://cartodb.com/gallery/)
+
+My contact: [aurelia@cartodb.com](mailto:aurelia@cartodb.com)
+
+If you make a map you're proud of or just want to say hello, connect with me [@auremoser](https://twitter.com/auremoser)
+
+![GA Traffice](https://raw.githubusercontent.com/auremoser/images/master/lrs.jpg)
