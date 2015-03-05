@@ -96,7 +96,10 @@ Downloading the [Traffic Data](http://www.gahighwaysafety.org/research/data-by-c
 * correct datatypes
 * do any preliminary sql or filtering that suits
 
-The sets I've prepared should give you "cleaner" data.
+The sets I've prepared should give you "cleaner" data. Here are the fields, or columns, we'll be focusing on:
+
+* Georgia Census Data - names of counties and population counts
+* Georgia Traffic Data - names of counties, crash counts, fatality counts (injury counts are also available)
 
 Here is what it might look like when you upload your data:
 
@@ -159,6 +162,9 @@ This is a query that adds some more information from the sample, to include perc
 
 You can enter queries, apply them, click on "create table from query" in the green field below the column names.
 ## Customizing UI
+Once you load both datasets, add them together as layers in the same visualization.
+* 
+You have myriad customization options in the in-browser editor.
 
 # Mapping Process
 # Building Narrative
