@@ -60,9 +60,11 @@ Email <cometdocs@ire.org> with your request for an upgraded CartoDB account and 
 ## Data Import
 We're going to be building a visualization of traffic accidents in Georgia.
 
-We'll be mapping crash/fatalities from motor accidents (c. 2006) and census population data from 2010 for a Crash/Pop map (what I've called an "onomatopoeia map," [just because](http://www.noisehelp.com/examples-of-onomatopoeia.html)).
+We'll be mapping crash/fatalities from motor accidents (c. 2006) and census population data (c. 2010 for a Crash/Pop map (what I've called an "onomatopoeia map," [just because](http://www.noisehelp.com/examples-of-onomatopoeia.html)).
 
-![Problem](https://raw.githubusercontent.com/auremoser/nicar-test/master/trafficTweet.png)
+![Problem](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/trafficTweet.png)
+
+Traffic accidents are pretty common/available datasets, as is census information. We'll be building a choropleth of traffic accidents, resulting in fatality and crash/injury reports percapita.
 
 ## Datasets
 You can download the datasets we'll be working with, and the files for the workshop here.
@@ -73,6 +75,91 @@ Description | Source | Download | Dropbox
 Traffic Fatality Data | [GA Office of Highway Safety](http://www.gahighwaysafety.org/research/data-by-county/)  | [crash_2006](https://www.dropbox.com/s/7rvrpkytll3bq1e/traffic_accidents.geojson?dl=1) | [crash_2006](https://www.dropbox.com/s/7rvrpkytll3bq1e/traffic_accidents.geojson?dl=0)
 
 # Mapping Data with JS
+## Getting Geospatial Data
+
+**Geospatial data** is info that ids a geolocation and its characteristic features/frontiers, typically represented by points, lines, polygons, and/or complex geographic features.
+
+### Issues:
++ Comes in multiple formats ([supported formats for CartoDB](http://docs.cartodb.com/cartodb-editor.html#supported-file-formats))
++ Sources uncertain
++ Contains errors
++ etc.
+
+Downloading the [Traffic Data](http://www.gahighwaysafety.org/research/data-by-county/) and the [Census Data](http://www.atlantaregional.com/info-center/2010-census) requires some finessing. 
+
+### Data Check:
+
+* check the source and update date of your data
+* remove headers/extra columns (in Excel or Open Refine)
+* import the csv/geojson and auto-geocoding via carto
+* correct column names to more intelligible terms
+* correct datatypes
+* do any preliminary sql or filtering that suits
+
+The sets I've prepared should give you "cleaner" data.
+
+Here is what it might look like when you upload your data:
+
+![Geocoding](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/1-geocoding.png)
+
+## Data representation in CartoDB (SQL schema)
+The most basic SQL statement is:
+
+```sql
+SELECT * FROM table_name
+```
+
+The * means everything. This means that all rows and columns from the table are given back once the query is run.
+
+A more detailed query is like this:
+
+```sql
+SELECT
+  name,
+  height,
+  age
+FROM
+  class_list
+WHERE
+  name = 'Aure'
+  AND (
+    height > 1.2
+    OR
+    height < 1.9
+  )
+```
+
+1. `SELECT` is what you're requesting (required)
+2. `FROM` is where the data is located (required)
+3. `WHERE` is the filter on the data you're requesting (optional)
+4. `GROUP BY` and `ORDER BY` are optional additions, you can read more about aggregate/other functions below
+
+## Geocoding + SQL/PostGIS
+There are two special columns in CartoDB:
+
+1. `the_geom`
+2. `the_geom_webmercator`
+
+The first of these is in the units of standard latitude/longitude, while the second is a projection based on the [original Mercator projection](http://en.wikipedia.org/wiki/Mercator_projection) but [optimized for the web](http://en.wikipedia.org/wiki/Web_Mercator).
+
+If you want to run SQL commands and see your map update, make sure to `SELECT` the `the_geom_webmercator` because this is the column that's used for mapping--the other is more of a convenience column since most datasets use lat/long.
+
+This is a SQL statement and you can load it in your visualization tray as a way of querying and exploring your data with immediate visual output. In this case the Traffic Accident data is aliased to "ta" and the Atlanta Census data is aliased to "ac"/
+
+```sql
+SELECT ac.the_geom_webmercator, ta.county_name, 100000 * ta.number_injury / ac.population injuries_per_capita
+      FROM
+        traffic_accidents ta, atl_census_demo_2010 ac
+      WHERE ac.county_name = ta.county_name
+```
+
+This is a query that adds some more information from the sample, to include percapita counts of the fatality and crash data available in your datasets.
+
+![sql](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/0-sql.png)
+
+You can enter queries, apply them, click on "create table from query" in the green field below the column names.
+## Customizing UI
+
 # Mapping Process
 # Building Narrative
 ## Tell Time + Stories
