@@ -526,7 +526,8 @@ function createSelector(layer) {
 
 ![sqlcss](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/0-ckpt-buttons.png)
 
-Helpful examples
+Examples:
++ [JSFiddle with Selectors](http://jsfiddle.net/gh/get/library/pure/CartoDB/academy/tree/master/t/03-cartodbjs-ground-up/lesson-3/jsfiddle_demo_cartocss)
 + [Interactivity tutorial](http://docs.cartodb.com/tutorials/custom_interactivity.html)
 + [Advanced example](http://byndhack.herokuapp.com/)
 
@@ -616,16 +617,18 @@ Outside of the CartoJS library, we have others to help you build dynamic narrati
 ## Talk Data in Charts
 You can use CartoDB's SQL API to query your data and pull it into any charting library of your choosing.
 
+![Chart-by-County](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/chartjs.png)
+
 Learn more about it [here](http://docs.cartodb.com/tips-and-tricks.html#charts--graphs)!
 
 Here are some examples:
 
 Type | Title | Link/Demo | BlogPost
 ---- |------ | --------- | ---------
+[Chart.js](http://www.chartjs.org/) Bar Graph | Traffic Data| [Aurelia's Block](http://bl.ocks.org/auremoser/af95a29cd76267d3925e)
 [Highcharts](http://www.highcharts.com/) | Sensor Data  | [Github](https://github.com/auremoser/VitalSigns-water/) / [Demo](http://auremoser.github.io/VitalSigns-water/)  | [MOW Post](http://blog.cartodb.com/map-of-the-week-pulse-plotting/)
 [Highcharts](http://www.highcharts.com/) | Weather Data | [Aurelia's Block](http://bl.ocks.org/auremoser/96b70f6dbcc724ecc973) | [Tutorial](https://stackedit.io/viewer#!provider=gist&gistId=e2d4f0f0b71f258f3ac9&filename=beirut.md)
 [Chart.js](http://www.chartjs.org/) Line Graph | Tornado Data  | [Andrew's Block](http://bl.ocks.org/andrewxhill/9134155) 
-[Chart.js](http://www.chartjs.org/) Bar Graph | Car Accidents Data| [Andy's Block](http://bl.ocks.org/ohasselblad/0320048cdba5b1c67903)
 [Plot.ly](https://plot.ly/) | Earthquake Data  | [Plotly Tutorial](https://plot.ly/ipython-notebooks/cartodb/) | [CartoDB Blog](http://blog.cartodb.com/plotly/)
 
 ### More
