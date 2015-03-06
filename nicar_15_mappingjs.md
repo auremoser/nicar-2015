@@ -38,7 +38,7 @@ Find the code checkpoints here:
 	+ Custom map with `CreateLayer` ([ckpt-2](https://github.com/auremoser/nicar-test/tree/master/ckpt-2-createVis))
 	+ Add SQL/CSS Templates [(ckpt-3](https://github.com/auremoser/nicar-test/tree/master/ckpt-3-createLayer))
 	+ Add Interactivity - Buttons ([ckpt-4](https://github.com/auremoser/nicar-test/tree/master/ckpt-4-sqlcss)) 
-	+ Infowindows ([ckpt-5]())
+	+ Infowindows ([ckpt-5](https://github.com/auremoser/nicar-2015/tree/master/ckpt-6-info))
 5. Building a Narrative
 	+ Case Study: ATL - Onomatopeoia Map
 	+ [CrashPop_Demo](http://bl.ocks.org/auremoser/)
@@ -533,7 +533,7 @@ Examples:
 
  
 ## Infowindows + More 
-#### Here's a reference point for this section ([ckpt-5]()
+#### Here's a reference point for this section [ckpt-5](https://github.com/auremoser/nicar-2015/tree/master/ckpt-6-info)
 
 ### Adding infowindows in Editor
 You can enable hover infowindows in your editor, that will port to your map and give you some choropleth context.
