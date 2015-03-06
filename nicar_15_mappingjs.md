@@ -5,7 +5,6 @@ Workshop - NICAR Session [Link](http://ire.org/events-and-training/event/1494/16
 
 **March 6, 2015, 3:20PM-4:20PM**
 
-#### Links
 Find this document here: 
 
 * Stackedit: <http://bit.ly/1BMad7n>
@@ -13,7 +12,7 @@ Find this document here:
 
 Find the code checkpoints here:
 
-* Github: <https://github.com/auremoser/nicar-test/>
+* Github: <https://github.com/auremoser/nicar-2015>
 
 ![Atlanta Flag from Wikipedia](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/flag-ga.png)
 
