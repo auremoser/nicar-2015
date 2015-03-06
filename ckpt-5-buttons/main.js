@@ -17,7 +17,7 @@ window.onload = function () {
        zoom: 7 // zoom projection to adjust starting point zoom
    });
 
-   // create layer selector
+   // Create layer selector
    function createSelector(layer) {
       var cartocss = "";
       var $options = $(".layer_selector").find("li");

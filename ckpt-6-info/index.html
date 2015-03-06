@@ -19,11 +19,12 @@
         right: 20px;
         top: 20px;
       }
-      #sql {
+      #legend {
         position: absolute;
-        right: 292px;
-        top: 20px;
+        left: 40px;
+        top: 0;
       }
+      /*BUTTON STYLES*/
       .layer_selector {
         background: rgba(255,255,255,0.9);
         border: 1px solid #999;
@@ -58,18 +59,68 @@
       .layer_selector li.selected {
         background-color: #7bccc4;
       }
-</style>
+      /*LEGEND STYLES*/
+      .legend {
+        background: rgba(255,255,255,0.9);
+        border: 1px solid #999;
+        border-radius: 5px;
+        font-family: 'Unica One', sans-serif;
+        font-size: 13px;
+        margin: 15px;
+        padding: 5px;
+        text-align: center;
+        width: 250px;
+      }
+      .legend .legend-title {
+        text-align: center;
+        margin-bottom: 10px;
+        font-family: 'Unica One', sans-serif;
+        text-transform: uppercase;
+        }
+      .legend .legend-scale ul {
+        font-family: 'Unica One', sans-serif;
+        margin: 0;
+        padding: 0;
+        float: left;
+        list-style: none;
+        }
+      .legend .legend-scale ul li {
+        display: block;
+        float: left;
+        width: 35px;
+        margin-bottom: 6px;
+        text-align: right;
+        font-size: 80%;
+        list-style: none;
+        }
+      .legend ul.legend-labels li span {
+        display: block;
+        float: left;
+        height: 15px;
+        width: 35px;
+        margin: 2px;
+        }
+      .legend .legend-source {
+        font-family: 'Unica One', sans-serif;
+        font-size: 70%;
+        color: #999;
+        clear: both;
+        }
+      .legend a {
+        color: #777;
+        }
+    </style>
 
-    <!-- SQL for a PostGIS fusion of two layers -->
-    <script type='sql/text' id='sql'>
+    <!-- SQL for fusing crash/pop data layers -->
+    <script type="text/template" id="sql">
       SELECT ac.the_geom_webmercator, ac.population, ta.county_name, ceil(100000 * ta. number_crash / ac. population) crashes_per_capita, ceil(100000 * ta.number_fatality / ac.population) fatalities_per_capita
       FROM
         traffic_accidents ta, atl_census_demo_2010 ac
       WHERE ac.county_name = ta.county_name
     </script>
 
-    <!-- style for your simple vis -->
-    <style type='cartocss/text' id='simple'>
+    <!-- SIMPLE COUNTY MAP STYLE -->
+    <script type='text/template' id="simple">
       /** simple visualization */
       #atl_census_demo_2010{
         polygon-fill: #0fa59f;
@@ -78,9 +129,9 @@
         line-width: 1;
         line-opacity: 1;
     }
-    </style>
-    <!-- style for your choropleth - fatalites per 100,000 ppl -->
-    <style type='cartocss/text' id='choropleth'>
+    </script>
+    <!-- CHOROPLETH STYLE - fatalites per 100,000 ppl -->
+    <script type='cartocss/text' id="choropleth">
       /** choropleth visualization */
       #atl_census_demo_2010{
         polygon-fill: #0fa59f;
@@ -90,43 +141,59 @@
         line-opacity: 1;
       }
       #atl_census_demo_2010 [ fatalities_per_capita <= 116.48223645894] {
-         polygon-fill: #f0f9e8;
+         polygon-fill: #0C2C84;
       }
       #atl_census_demo_2010 [ fatalities_per_capita <= 43.4522839606757] {
-         polygon-fill: #ccebc5;
+         polygon-fill: #225EA8;
       }
       #atl_census_demo_2010 [ fatalities_per_capita <= 34.5685840707965] {
-         polygon-fill: #a8ddb5;
+         polygon-fill: #1D91C0;
       }
       #atl_census_demo_2010 [ fatalities_per_capita <= 27.2727272727273] {
-         polygon-fill: #7bccc4;
+         polygon-fill: #41B6C4;
       }
       #atl_census_demo_2010 [ fatalities_per_capita <= 21.2074084546868] {
-         polygon-fill: #4eb3d3;
+         polygon-fill: #7FCDBB;
       }
       #atl_census_demo_2010 [ fatalities_per_capita <= 16.7128259001051] {
-         polygon-fill: #2b8cbe;
+         polygon-fill: #C7E9B4;
       }
       #atl_census_demo_2010 [ fatalities_per_capita <= 12.3350191192796] {
-         polygon-fill: #08589e;
+         polygon-fill: #FFFFCC;
       }
-    </style>
+    </script>
   </head>
   <body>
     <div id="map"></div>
-    <!-- add layer selector buttons -->
+    <!-- ADD BUTTONS -->
     <div id="cartocss" class="layer_selector">
         <p>Buttons</p>
         <ul>
-            <li data="choropleth">Fatality Choropleth Per Capita</li>
+            <li data="choropleth" data-sql="sql">Fatality Choropleth Per Capita</li>
             <li data="simple">Simple County Map</li>
         </ul>
+    </div>
+
+    <!-- LEGENDS -->
+    <div id="legend" class='legend'>
+      <div class='legend-title'>Accidents by County (2006)</div>
+      <div class='legend-scale'>
+        <ul class='legend-labels'>
+          <li><span style='background:#FFFFCC;'></span> < 12</li>
+          <li><span style='background:#C7E9B4;'></span></li>
+          <li><span style='background:#7FCDBB;'></span></li>
+          <li><span style='background:#41B6C4;'></span></li>
+          <li><span style='background:#1D91C0;'></span></li>
+          <li><span style='background:#225EA8;'></span></li>
+          <li><span style='background:#0C2C84;'></span> < 112</li>
+        </ul>
+      </div>
+      <div class='legend-source'>Source: <a href="http://www.gahighwaysafety.org/research/data-by-county/">GA Office of Highway Safety</a></div>
     </div>
 
     <!-- include cartodb.js library -->
     <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
 
-    <!-- place your code betwee the script tags below -->
     <script src="main.js"></script>
   </body>
 </html>
