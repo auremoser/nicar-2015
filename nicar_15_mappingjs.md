@@ -15,7 +15,7 @@ Find the code checkpoints here:
 
 * Github: <https://github.com/auremoser/nicar-2015>
 
-![Atlanta Flag from Wikipedia](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/flag-ga.png)
+![Georgia State Flag from Wikipedia](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/flag-ga.png)
 
 # Outline
 0. Visualizing Data
