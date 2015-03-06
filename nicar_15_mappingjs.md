@@ -271,6 +271,7 @@ Once you load your data, you can play with the editor options to see what type o
 
 ![population](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/3-population.png)
 
+
 ## Quick map with `CreateVis`
 #### Here's a reference point for this section: [ckpt-1](https://github.com/auremoser/nicar-test/tree/master/ckpt-1-visjson)
 
