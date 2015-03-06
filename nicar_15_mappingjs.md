@@ -1,4 +1,5 @@
-## Mapping JS: Building narrative with geo data + CartoDB
+## Mapping JS 
+### Building narrative with geo data + CartoDB
 
 Aurelia Moser, Map Scientist, [CartoDB](http://cartodb.com)
 Workshop - NICAR Session [Link](http://ire.org/events-and-training/event/1494/1646/)
@@ -616,6 +617,8 @@ Outside of the CartoJS library, we have others to help you build dynamic narrati
 
 ## Talk Data in Charts
 You can use CartoDB's SQL API to query your data and pull it into any charting library of your choosing.
+
+You can easily wire up a chart of county-level traffic fatalities, [check the code here](http://bl.ocks.org/auremoser/af95a29cd76267d3925e).
 
 ![Chart-by-County](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/chartjs.png)
 
