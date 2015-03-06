@@ -469,6 +469,8 @@ These two pieces of code are just a jQuery operation that finds the HTML element
 
 Check [the checkpoint code](https://github.com/auremoser/nicar-test/tree/master/ckpt-4-sqlcss) here if you're stuck.
 
+![createButtons](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/0-ckpt-buttons.png)
+
 **Reload your browser window, your map should work**
 
 
@@ -582,7 +584,9 @@ sublayers[0].infowindow.set('template', $('#infowindow_template').html());
 
 You can build on this, or checkout the demo block here to view the result of your work with some limited interactivity!
 
-[Onomatopoeia (Crash/Pop) Map]()
+[Onomatopoeia (Crash/Pop) Map](http://bl.ocks.org/auremoser/a90356af6669ccdc11ae)
+
+![info](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/0-ckpt-info.png)
 
 # Building Narrative
 Outside of the CartoJS library, we have others to help you build dynamic narrative with your data.
