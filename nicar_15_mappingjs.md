@@ -285,6 +285,8 @@ You will need:
 * You can also run a little server by navigating to the folder where you will store your files and running `http-server &`; you have
 
 ###VisJson
+![Share vizualization](http://i.imgur.com/gVxeNMg.png)
+
 The viz.json file is the main source of data for CartoDB JavaScript functions (createVis and createLayer) for creating visualizations in the browser.
 
 ![visjson](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/1-visJson.png)
