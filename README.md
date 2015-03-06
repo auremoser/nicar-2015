@@ -1,5 +1,4 @@
 # NICAR - Mapping JS with CartoDB
-[talk] test repo for code chkpts
 
 ###CONTENTS
 This repo contains "code checkpoints" for the NICAR workshop outlined [here](https://stackedit.io/viewer#!provider=gist&gistId=ae2d6602353d9e63c91a&filename=nicar_15_mappingjs.md).
@@ -16,7 +15,9 @@ The **Onomatopoeia Map** (because it involves *crash* and *pop* data...ha) is br
 * CreateVis Method - ckpt-2-createVis
 * CreateLayer Method - ckpt-3-createLayer
 * SQL and CSS templating - ckpt-4-sqlcss
-* Buttons! and Interactivity -ckpt-5-buttons
+* Buttons! and Interactivity - ckpt-5-buttons
+* Info Windows etc - ckpt-6-info
+* BONUS! Charts - ckpt-7-chart
 
 
 ###OUTLINE

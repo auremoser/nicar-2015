@@ -42,7 +42,7 @@ Find the code checkpoints here:
 	+ Infowindows ([ckpt-5](https://github.com/auremoser/nicar-2015/tree/master/ckpt-6-info))
 5. Building a Narrative
 	+ Case Study: ATL - Onomatopeoia Map
-	+ [CrashPop_Demo](http://bl.ocks.org/auremoser/)
+	+ [CrashPop_Demo](http://bl.ocks.org/auremoser/a90356af6669ccdc11ae)
 	+ Tell Time/Stories: Odyssey + Torque
 	+ Datatelling: Graphs + Charts
 6. Wrap-Up and Resources
@@ -586,7 +586,7 @@ sublayers[0].infowindow.set('template', $('#infowindow_template').html());
 
 You can build on this, or checkout the demo block here to view the result of your work with some limited interactivity!
 
-[Onomatopoeia (Crash/Pop) Map](http://bl.ocks.org/auremoser/a90356af6669ccdc11ae)
+####[Onomatopoeia (Crash/Pop) Map](http://bl.ocks.org/auremoser/a90356af6669ccdc11ae)
 
 ![info](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/0-ckpt-info.png)
 
