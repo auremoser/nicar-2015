@@ -469,7 +469,7 @@ These two pieces of code are just a jQuery operation that finds the HTML element
 
 Check [the checkpoint code](https://github.com/auremoser/nicar-test/tree/master/ckpt-4-sqlcss) here if you're stuck.
 
-![createButtons](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/0-ckpt-buttons.png)
+![createButtons](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/0-ckpt-sqlcss.png)
 
 **Reload your browser window, your map should work**
 
