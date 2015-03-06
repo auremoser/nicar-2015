@@ -16,7 +16,7 @@
       }
     </style>
 
-    <!-- SQL for a PostGIS fusion of two layers -->
+    <!-- SQL TO FUSE 2 LAYERS -->
     <script type='sql/text' id='sql'>
       SELECT ac.the_geom_webmercator, ac.population, ta.county_name, ceil(100000 * ta. number_crash / ac. population) crashes_per_capita, ceil(100000 * ta.number_fatality / ac.population) fatalities_per_capita
       FROM
@@ -24,7 +24,7 @@
       WHERE ac.county_name = ta.county_name
     </script>
 
-    <!-- style for your choropleth -->
+    <!-- CHOROPLETH CSS -->
     <style type='cartocss/text' id='choropleth'>
     /** choropleth visualization */
     #atl_census_demo_2010{

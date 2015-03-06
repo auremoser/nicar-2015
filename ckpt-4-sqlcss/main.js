@@ -1,12 +1,12 @@
 window.onload = function () {
-  //
-   var layerSource = 'http://documentation.cartodb.com/api/v2/viz/ed78c85e-c11b-11e4-ab66-0e853d047bba/viz.json'; // add your url ID here between viz/ and /viz.json
-
+  // add your url ID here between viz/ and /viz.json or copy the visjson from your editor
+   var layerSource = 'http://documentation.cartodb.com/api/v2/viz/ed78c85e-c11b-11e4-ab66-0e853d047bba/viz.json';
+  // ADD JQUERY TEMPLATE OPTIONS
    var options = {
        sql: $("#sql").text(), // here you can set sql to run on your tables
        cartocss: $("#choropleth").text() // here you can set css to style your choropleth
    }
-   // clear sql of space and returns
+   // CLEAR SQL OF SPACES/RETURNS
    options.sql = options.sql.replace(/(\r\n|\n|\r)/gm,'').trim();
 
    var sublayers = [];

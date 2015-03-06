@@ -26,6 +26,8 @@ All images used in the tutorial are available in the `img` directory.
 
 ![georgia-crash-map](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/final-choro.png)
 
+![georgia-crash-chart](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/chartjs.png)
+
 ###LINKS
 Here are some helpful references for moving forward or troubleshooting what you find here:
 

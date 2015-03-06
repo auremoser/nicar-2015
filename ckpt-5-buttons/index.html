@@ -24,6 +24,7 @@
         right: 292px;
         top: 20px;
       }
+      /*BUTTON STYLES*/
       .layer_selector {
         background: rgba(255,255,255,0.9);
         border: 1px solid #999;
@@ -60,7 +61,7 @@
       }
 </style>
 
-    <!-- SQL for a PostGIS fusion of two layers -->
+    <!-- sql to fuse two layers -->
     <script type='sql/text' id='sql'>
       SELECT ac.the_geom_webmercator, ac.population, ta.county_name, ceil(100000 * ta. number_crash / ac. population) crashes_per_capita, ceil(100000 * ta.number_fatality / ac.population) fatalities_per_capita
       FROM
@@ -68,7 +69,7 @@
       WHERE ac.county_name = ta.county_name
     </script>
 
-    <!-- style for your simple vis -->
+    <!-- SIMPLE VIS CSS -->
     <style type='cartocss/text' id='simple'>
       /** simple visualization */
       #atl_census_demo_2010{
@@ -79,7 +80,7 @@
         line-opacity: 1;
     }
     </style>
-    <!-- style for your choropleth - fatalites per 100,000 ppl -->
+    <!-- choropleth css - fatalites per 100,000 ppl -->
     <style type='cartocss/text' id='choropleth'>
       /** choropleth visualization */
       #atl_census_demo_2010{
@@ -114,7 +115,7 @@
   </head>
   <body>
     <div id="map"></div>
-    <!-- add layer selector buttons -->
+    <!-- ADD BUTTONS -->
     <div id="cartocss" class="layer_selector">
         <p>Buttons</p>
         <ul>
@@ -126,7 +127,7 @@
     <!-- include cartodb.js library -->
     <script src="http://libs.cartocdn.com/cartodb.js/v3/cartodb.js"></script>
 
-    <!-- place your code betwee the script tags below -->
+    <!-- place your code between the script tags below -->
     <script src="main.js"></script>
   </body>
 </html>
