@@ -20,7 +20,7 @@ The **Onomatopoeia Map** (because it involves *crash* and *pop* data...ha) is br
 
 
 ###OUTLINE
-The outline for the lesson is also availabe in the repo as a .md file [here].
+The outline for the lesson is also availabe in the repo as a .md file [here](https://github.com/auremoser/nicar-2015/blob/master/nicar_15_mappingjs.md).
 All images used in the tutorial are available in the `img` directory.
 
 ![georgia-crash-map](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/final-choro.png)
