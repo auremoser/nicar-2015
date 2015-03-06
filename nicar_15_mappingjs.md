@@ -84,7 +84,7 @@ IRE members are eligible for a free upgraded account that includes:
 * private tables ([a Magellan account feature](http://cartodb.com/pricing))
 * sync tables 
 
-Email <cometdocs@ire.org> with your request for an upgraded CartoDB account and IRE member info, and we'll get you setup!
+Email cartodb@ire.org with your request for an upgraded account and membership ID, and we'll set you up.
 
 ## Data Import
 We're going to be building a visualization of traffic accidents in Georgia.
