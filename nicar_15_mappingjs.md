@@ -1,12 +1,11 @@
-## Mapping JS 
-### Building narrative with geo data + CartoDB
+## Mapping JS: Building narrative with geo data + CartoDB
 
 Aurelia Moser, Map Scientist, [CartoDB](http://cartodb.com)
 Workshop - NICAR Session [Link](http://ire.org/events-and-training/event/1494/1646/)
 
 **March 6, 2015, 3:20PM-4:20PM**
 
-Find this document here: 
+Find this document here:
 
 * Stackedit: <http://bit.ly/1BMad7n>
 * Gist: <http://bit.ly/1BciteV>
@@ -35,13 +34,15 @@ Find the code checkpoints here:
 	+ Merging Tables
 	+ Customizing UI
 4. Building a Map
-	+ Quick map with `CreateVis` ([ckpt-1](https://github.com/auremoser/nicar-test/tree/master/ckpt-1-visjson))
-	+ Custom map with `CreateLayer` ([ckpt-2](https://github.com/auremoser/nicar-test/tree/master/ckpt-2-createVis))
-	+ Add SQL/CSS Templates [(ckpt-3](https://github.com/auremoser/nicar-test/tree/master/ckpt-3-createLayer))
-	+ Add Interactivity - Buttons ([ckpt-4](https://github.com/auremoser/nicar-test/tree/master/ckpt-4-sqlcss)) 
-	+ Infowindows ([ckpt-5](https://github.com/auremoser/nicar-2015/tree/master/ckpt-6-info))
+  + Basics of `VisJson` ([ckpt-1](https://github.com/auremoser/nicar-test/tree/master/ckpt-1-visjson))
+	+ Quick map with `CreateVis` ([ckpt-2](https://github.com/auremoser/nicar-test/tree/master/ckpt-2-createVis))
+	+ Custom map with `CreateLayer` [(ckpt-3](https://github.com/auremoser/nicar-test/tree/master/ckpt-3-createLayer))
+	+ Add SQL/CSS Templates ([ckpt-4](https://github.com/auremoser/nicar-test/tree/master/ckpt-4-sqlcss))
+	+ Add Interactivity - Buttons ([ckpt-5](https://github.com/auremoser/nicar-2015/tree/master/ckpt-5-buttons))
+	+ Infowindows ([ckpt-6](https://github.com/auremoser/nicar-2015/tree/master/ckpt-6-info))
+  + BONUS: Charts ([ckpt-7](https://github.com/auremoser/nicar-2015/tree/master/ckpt-7-chart))
 5. Building a Narrative
-	+ Case Study: ATL - Onomatopeoia Map
+	+ Case Study: GA - Onomatopeoia Map
 	+ [CrashPop_Demo](http://bl.ocks.org/auremoser/a90356af6669ccdc11ae)
 	+ Tell Time/Stories: Odyssey + Torque
 	+ Datatelling: Graphs + Charts
@@ -50,16 +51,28 @@ Find the code checkpoints here:
 # Visualizing Data
 ![Types of Visualizations](https://raw.githubusercontent.com/auremoser/images/master/1-vis-types.png)
 
+Source: [The Data Visualization Catalogue](http://www.datavizcatalogue.com/).
+
+![PeriodicTable](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/periodic.png)
+
+Source: [Periodic Table of Visualizations](http://www.visual-literacy.org/periodic_table/periodic_table.html)
+
 [**CartoDB**](cartodb.com) is a light open source library and graphical user interface application for hosting and visualizing geospatial data.
 
 ![Data import dialog](https://raw.githubusercontent.com/ohasselblad/workshops/master/img/common/data_import_dialog.png)
 
 # Intro to CartoDB
 ## Examples
++ [Alcatraz Escape Revisited](http://www.washingtonpost.com/news/morning-mix/wp/2014/12/15/the-alcatraz-escapees-could-have-survived-and-this-interactive-model-proves-it/)
++ [LA Sheriff Election Results](http://graphics.latimes.com/2014-la-sheriff-primary-map/)
++ [Starwars Galaxy Map](http://www.swgalaxymap.com/)
++ [Demonstrations in Brazil](http://blog.cartodb.com/mapping-the-world-ongoing-demonstrations-in-brazil/)
 + [Global Forest Watch](http://www.globalforestwatch.org/map/3/15.00/27.00/ALL/grayscale/loss,forestgain?begin=2001-01-01&end=2013-12-31&threshold=30)
 + [Urban Reviewer](http://www.urbanreviewer.org/#map=12/40.7400/-73.9998&sidebar=plans)
 
 ![globalForestWatch](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/globalforest.png)
+
+![urban-reviewer](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/urban_reviewer_code_example.png)
 
 ## Tour of the interface
 ![int-data](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/int-data.jpg)
@@ -67,6 +80,7 @@ Find the code checkpoints here:
 ![int-vis](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/int-viz.jpg)
 ![int-share](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/int-share.jpg)
 ## APIs / JS Libs
+You can read more about the [CartoDB APIs and JS Library here](http://docs.cartodb.com/cartodb-platform.html)
 * [CartoJS](http://docs.cartodb.com/cartodb-platform/cartodb-js.html) - JS library for interacting with CartoDB
 * [Maps API](http://docs.cartodb.com/cartodb-platform/maps-api.html) - generate public/private maps with data hosted on your CDB account
 * [SQL API](http://docs.cartodb.com/cartodb-platform/sql-api.html) - run sql in your code that dynamically filters/affects/queries your mapped data stored in CartoDB
@@ -82,7 +96,7 @@ IRE members are eligible for a free upgraded account that includes:
 
 * more space
 * private tables ([a Magellan account feature](http://cartodb.com/pricing))
-* sync tables 
+* sync tables
 
 Email cartodb@ire.org with your request for an upgraded account and membership ID, and we'll set you up.
 
@@ -91,7 +105,7 @@ We're going to be building a visualization of traffic accidents in Georgia.
 
 ![countychoropleth](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/2-countyChoro.png)
 
-We'll be mapping crash/fatalities from motor accidents (c. 2006) and census population data (c. 2010 for a Crash/Pop map (what I've called an "onomatopoeia map," [just because](http://www.noisehelp.com/examples-of-onomatopoeia.html)).
+We'll be mapping crash/fatalities from motor accidents (c. 2006) and census population data (c. 2010) for a Crash/Pop map (what I've called an "onomatopoeia map," [just because](http://www.noisehelp.com/examples-of-onomatopoeia.html)).
 
 ![Problem](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/trafficTweet.png)
 
@@ -102,7 +116,7 @@ You can download the datasets we'll be working with, and the files for the works
 
 Description | Source | Download | Dropbox
 ---------- | -------- | -------- | ---------
-2010 Georgia Census Demographics | [Atlanta Regional Data](http://www.atlantaregional.com/info-center/2010-census)  | [pop_2010s](https://www.dropbox.com/s/6j6j5vt616yq2ek/atl_census_demo_2010.geojson?dl=1) | [pop_2010s](https://www.dropbox.com/s/6j6j5vt616yq2ek/atl_census_demo_2010.geojson?dl=0)
+2010 Georgia Census Demographics | [Atlanta Regional Data](http://www.atlantaregional.com/info-center/2010-census)  | [pop_2010](https://www.dropbox.com/s/6j6j5vt616yq2ek/atl_census_demo_2010.geojson?dl=1) | [pop_2010](https://www.dropbox.com/s/6j6j5vt616yq2ek/atl_census_demo_2010.geojson?dl=0)
 Traffic Fatality Data | [GA Office of Highway Safety](http://www.gahighwaysafety.org/research/data-by-county/)  | [crash_2006](https://www.dropbox.com/s/7rvrpkytll3bq1e/traffic_accidents.geojson?dl=1) | [crash_2006](https://www.dropbox.com/s/7rvrpkytll3bq1e/traffic_accidents.geojson?dl=0)
 
 ![trafficData](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/4-trafficData.png)
@@ -118,7 +132,7 @@ Traffic Fatality Data | [GA Office of Highway Safety](http://www.gahighwaysafety
 + Contains errors
 + etc.
 
-Downloading the [Traffic Data](http://www.gahighwaysafety.org/research/data-by-county/) and the [Census Data](http://www.atlantaregional.com/info-center/2010-census) requires some finessing. 
+Downloading the [Traffic Data](http://www.gahighwaysafety.org/research/data-by-county/) and the [Census Data](http://www.atlantaregional.com/info-center/2010-census) requires some finessing.
 
 ### Data Check:
 
@@ -170,7 +184,7 @@ WHERE
 1. `SELECT` is what you're requesting (required)
 2. `FROM` is where the data is located (required)
 3. `WHERE` is the filter on the data you're requesting (optional)
-4. `GROUP BY` and `ORDER BY` are optional additions, you can read more about aggregate/other functions below
+4. `GROUP BY` and `ORDER BY` are optional additions, you can read more about aggregate/other functions below.
 
 ## Geocoding + SQL/PostGIS
 There are two special columns in CartoDB:
@@ -182,10 +196,10 @@ The first of these is in the units of standard latitude/longitude, while the sec
 
 If you want to run SQL commands and see your map update, make sure to `SELECT` the `the_geom_webmercator` because this is the column that's used for mapping--the other is more of a convenience column since most datasets use lat/long.
 
-This is a SQL statement and you can load it in your visualization tray as a way of querying and exploring your data with immediate visual output. In this case the Traffic Accident data is aliased to "ta" and the Atlanta Census data is aliased to "ac"/
+This is a SQL statement and you can load it in your visualization tray as a way of querying and exploring your data with immediate visual output. In this case the Traffic Accident data is aliased to "ta" and the Atlanta Census data is aliased to "ac".
 
 ```sql
-SELECT ac.the_geom_webmercator, ta.county_name, 100000 * ta.number_injury / ac.population injuries_per_capita
+SELECT ac.the_geom_webmercator, ta.county_name, 100000 * ta.number_fatality / ac.population fatalities_per_capita
       FROM
         traffic_accidents ta, atl_census_demo_2010 ac
       WHERE ac.county_name = ta.county_name
@@ -198,7 +212,7 @@ This is a query that adds some more information from the sample, to include perc
 You can enter queries, apply them, click on "create table from query" in the green field below the column names.
 
 ## Merging Tables
-Joining and merging tables to make one dataset is a common need. Say you have two datasets related to the same place/map and need to combine them so that they can share the same geometry. 
+Joining and merging tables to make one dataset is a common need. Say you have two datasets related to the same place/map and need to combine them so that they can share the same geometry.
 
 You can do this in SQL [read more here](http://docs.cartodb.com/tutorials/merging_data.html), but CartoDB also has an in-editor button for that.
 
@@ -206,15 +220,17 @@ You can do this in SQL [read more here](http://docs.cartodb.com/tutorials/mergin
 
 Here is a usecase relative to these datasets:
 
-* when you download the traffic data from source, it has county names but no polygon or geospatial reference 
+* when you download the traffic data from source, it has county names but no polygon or geospatial reference
 * [this dataset](https://www.dropbox.com/s/eyq2p1uzg2njifx/ga-counties.kml?dl=0) has polygon info for georgia counties, as well as a corresponding column of county names
 * you can load them both into cartodb, and select the "merge tables" button
 * select `column` or `spatial` join
 
 ![joins](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/5-joins.png)
+
 * select the columns that you want to join on, in this case, both datasets share a "county_name" column
 
 ![merge](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/5-merge.png)
+
 * toggle the columns you want to exist in your new "joined" dataset
 
 ![mergGen](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/5-mergeGen.png)
@@ -222,7 +238,7 @@ Here is a usecase relative to these datasets:
 ## Customizing UI
 Once you load both datasets, add them together as layers in the same visualization.
 
-* navigate to your census data, select `Add layer`, create a visualization when prompted (titled something like `nicar-atl` or whatever you'd like)
+Navigate to your census data, select `Add layer`, create a visualization when prompted (titled something like `nicar-atl` or whatever you'd like).
 
 ![sql](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/0-wizard.png)
 
@@ -230,12 +246,12 @@ You have myriad customization options in the in-browser editor.
 
 ![editor customizations](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/7-editorCustom.png)
 
-* `sql` lets you run sql and postgis functions across your data
-* `wizard` lets you adjust the type, colors and fills in your map
-* `infowindow` lets you creat hovers, tooltips with information from your datatables
-* `css` allows you to customize the css and style of your map outside the wizard
-* `legends` allows you to creat keys for your map
-* `filters` allows you to filter the data without sql
+* `sql` - run sql and postgis functions across your data
+* `wizard` - adjust the type, colors and fills in your map
+* `infowindow` - create hovers, tooltips with information from your datatables
+* `css` - customize the css and style of your map outside the wizard
+* `legends` - create keys for your map
+* `filters` - filter the data without sql
 
 You can also select and change your `basemaps` in the upper left corner of your map.
 
@@ -261,7 +277,7 @@ Check out [visualization documentation](http://docs.cartodb.com/cartodb-editor.h
 #### Choropleth
 We'll be making choropleths because we have county-level polygon data for Georgia.
 
-Choropleth maps show map elements colored according to where a value associated with the map element falls in a range. It's like a histogram where each bin is colored differently according to a color scale you pick. 
+Choropleth maps show map elements colored according to where a value associated with the map element falls in a range. It's like a histogram where each bin is colored differently according to a color scale you pick.
 
 * **_Quantification_** is an option to pay attention to since it controls how the data is binned into different colors.
 * **_Equal interval_** gives bins of equal size across the range,  which means that outliers stand out.
@@ -270,7 +286,6 @@ Choropleth maps show map elements colored according to where a value associated 
 Once you load your data, you can play with the editor options to see what type of visualization you might light to make. You can make a `population` choropleth for example, using the `population` data from your census table.
 
 ![population](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/3-population.png)
-
 
 ## Quick map with `CreateVis`
 #### Here's a reference point for this section: [ckpt-1](https://github.com/auremoser/nicar-test/tree/master/ckpt-1-visjson)
@@ -283,10 +298,11 @@ You will need:
 
 #### Running Locally
 * You can open HTML files on your hard drive from a browser. Use CMD+O or CTRL+O like you'd do to open a file in any program.
-* You can also run a little server by navigating to the folder where you will store your files and running `http-server &`; you have
+* You can also run a little server by navigating to the folder where you will store your files and running `http-server &`; you have node installed with http-server setup!
 
 ###VisJson
-![Share vizualization](http://i.imgur.com/gVxeNMg.png)
+
+![Share-vizualization](http://i.imgur.com/gVxeNMg.png)
 
 The viz.json file is the main source of data for CartoDB JavaScript functions (createVis and createLayer) for creating visualizations in the browser.
 
@@ -317,7 +333,7 @@ Overview of template:
 2. `map` element
 3. `<script>` tags
 
-Create basic visualization using createVis (docs here) by copying and pasting the following:
+Create basic visualization using `createVis` by copying and pasting the following either between script tags in your html or by making a file called `[?].js` (I used `main.js` in the template) and referencing it between your script tags:
 
 ```js
 window.onload = function() {
@@ -363,7 +379,7 @@ window.onload = function () {
    var sublayers = [];
 
    // instantiate map object from Leaflet
-   var mapObj = new L.Map(map, {  // <-- Replace map_id with your #id for rendering
+   var mapObj = new L.Map(map, {  // <-- use your map #id for rendering
        center: [31.7550, -84.3900], // Atlanta, Georgia
        zoom: 7 // zoom projection to adjust starting point zoom
    });
@@ -393,7 +409,7 @@ One big difference here is that we explicitly expose the SQL and CartoCSS, allow
 ![createLayer](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/0-ckpt-createLayer.png)
 
 **Edit the fields to match your map reload your browser window, your map should work.**
- 
+
 ## Add SQL/CSS Templates
 #### Here's a reference point for this section: [ckpt-3](https://github.com/auremoser/nicar-test/tree/master/ckpt-3-createLayer)
 
@@ -401,9 +417,9 @@ One big difference here is that we explicitly expose the SQL and CartoCSS, allow
 
 To accomplish this, we need to know how many crashes happened per neighborhood, then divide that number by the population of the neighborhood.
 
-You can do this a number of ways, we'll be using SQL, you can read documentation on this in the [PostGIS docs](http://postgis.net/docs/) and otherwise just follow along.
+You can do this a number of ways, we'll be using SQL, you can read documentation on available function magic in the [PostGIS docs](http://postgis.net/docs/) and otherwise just follow along.
 
-Going back to the createLayer example we just made:
+Going back to the `createLayer` example we just made:
 
 * Copy the following SQL into your index.html file below the `<style>` tags.
 
@@ -417,7 +433,7 @@ Going back to the createLayer example we just made:
 ```
 
 * Paste the following CartoCSS structure in the `<head>` section of your webpage.
-    This is a pre-configured Choropleth style. You could also create one on the fly by calculating the range in data and creating bins within that range.
+* This is a pre-configured Choropleth style. You could also create one on the fly by calculating the range in data and creating bins within that range.
 
 ```css
 <style type='cartocss/text' id='choropleth'>
@@ -453,7 +469,7 @@ Going back to the createLayer example we just made:
 </style>
 ```
 
-* Next replace the string for `sql in the options object with 
+* Next replace the string for `sql in the options object with
 
 ```javascript
 $("#sql").text(),
@@ -471,14 +487,14 @@ These two pieces of code are just a jQuery operation that finds the HTML element
 
 `sublayers[0].set(options); // altering the SQL and CartoCSS; see above`
 
-Check [the checkpoint code](https://github.com/auremoser/nicar-test/tree/master/ckpt-4-sqlcss) here if you're stuck.
+Check [the checkpoint code](https://github.com/auremoser/nicar-test/tree/master/ckpt-4-sqlcss) here if you're stuck. You can also run the SQL in the tray (not in the your local files) and the the map will populate. The advantage to adding it as a template, is that you can swap it for other SQL or run different queries with different template references locally, and you are not limited to one query option.
 
 ![createButtons](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/0-ckpt-sqlcss.png)
 
-**Reload your browser window, your map should work**
+**Reload your browser window, your map should work!**
 
 
-## Add Interactivity - Buttons 
+## Add Interactivity - Buttons
 #### Here's a reference point for this section: [ckpt-4](https://github.com/auremoser/nicar-test/tree/master/ckpt-4-sqlcss)
 
 To add more interactivity, we'll create two buttons to toggle between the `Simple` map view and the view that gives a choropleth map. We can easily do this in CartoDB by using the `sublayer.setSQL()` and `sublayer.setCartoCSS()` methods to change the data.
@@ -531,12 +547,15 @@ function createSelector(layer) {
 ![sqlcss](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/0-ckpt-buttons.png)
 
 Examples:
+
+![quake-sample](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/quakes.png)
+
 + [JSFiddle with Selectors](http://jsfiddle.net/gh/get/library/pure/CartoDB/academy/tree/master/t/03-cartodbjs-ground-up/lesson-3/jsfiddle_demo_cartocss)
 + [Interactivity tutorial](http://docs.cartodb.com/tutorials/custom_interactivity.html)
 + [Advanced example](http://byndhack.herokuapp.com/)
 
- 
-## Infowindows + More 
+
+## Infowindows + More
 #### Here's a reference point for this section [ckpt-5](https://github.com/auremoser/nicar-2015/tree/master/ckpt-6-info)
 
 ### Adding infowindows in Editor
@@ -589,7 +608,7 @@ sublayers[0].infowindow.set('template', $('#infowindow_template').html());
 
 You can build on this, or checkout the demo block here to view the result of your work with some limited interactivity!
 
-####[Onomatopoeia (Crash/Pop) Map](http://bl.ocks.org/auremoser/a90356af6669ccdc11ae)
+### Final project here: [Onomatopoeia (Crash/Pop) Map](http://bl.ocks.org/auremoser/a90356af6669ccdc11ae)
 
 ![info](https://raw.githubusercontent.com/auremoser/nicar-test/master/img/0-ckpt-info.png)
 
@@ -600,15 +619,19 @@ Outside of the CartoJS library, we have others to help you build dynamic narrati
 
 **Maps that tell Time** - **[Torque](http://docs.cartodb.com/tutorials/introduction_torque.html)**
 
+<iframe src="https://srogers.cartodb.com/viz/337d9194-6458-11e3-85b5-e5e70547d141/embed_map" width="100%" height="500px"></iframe>
+
 1. [Demonstrations in Brazil](http://blog.cartodb.com/mapping-the-world-ongoing-demonstrations-in-brazil/)
 2. Tweets that mention [sunrise map](http://cartodb.s3.amazonaws.com/static_vizz/sunrise.html)
 3. [Animal migration patterns](http://robbykraft.github.io/AnimalTrack/)
 4. [Beyonce Album Release](https://srogers.cartodb.com/viz/337d9194-6458-11e3-85b5-e5e70547d141/embed_map)
 5. [Diwali Celebrated](http://bl.ocks.org/anonymous/raw/b9b7c7d6de1c6398e435/)
 6. [Ramadan Tweets w/OdysseyJS](http://bl.ocks.org/anonymous/raw/2f1e9a5a74ceeb88e977/)
-	7. [Alcatraz Escapees](http://www.washingtonpost.com/news/morning-mix/wp/2014/12/15/the-alcatraz-escapees-could-have-survived-and-this-interactive-model-proves-it/?tid=hp_mm&hpid=z3)
-	8. [Lynching and the Press](http://yale.cartodb.com/u/mdweaver/viz/ffd06ece-8545-11e4-a898-0e018d66dc29/embed_map)
-	
+7. [Alcatraz Escapees](http://www.washingtonpost.com/news/morning-mix/wp/2014/12/15/the-alcatraz-escapees-could-have-survived-and-this-interactive-model-proves-it/?tid=hp_mm&hpid=z3)
+8. [Lynching and the Press](http://yale.cartodb.com/u/mdweaver/viz/ffd06ece-8545-11e4-a898-0e018d66dc29/embed_map)
+
+![Twitter Import](http://i.imgur.com/d3GSSYQ.gif)
+
 **Maps that tell Stories** - **[Odyssey JS](http://cartodb.github.io/odyssey.js/index.html)**
 
 1. [Tour of Scotland](http://alasdair.cartodb.com/viz/1332c872-a887-11e4-8c45-0e9d821ea90d/embed_map?zoom=14&center_lat=55.948595&center_lon=-3.199913)
@@ -634,7 +657,7 @@ Type | Title | Link/Demo | BlogPost
 [Chart.js](http://www.chartjs.org/) Bar Graph | Traffic Data| [Aurelia's Block](http://bl.ocks.org/auremoser/af95a29cd76267d3925e)
 [Highcharts](http://www.highcharts.com/) | Sensor Data  | [Github](https://github.com/auremoser/VitalSigns-water/) / [Demo](http://auremoser.github.io/VitalSigns-water/)  | [MOW Post](http://blog.cartodb.com/map-of-the-week-pulse-plotting/)
 [Highcharts](http://www.highcharts.com/) | Weather Data | [Aurelia's Block](http://bl.ocks.org/auremoser/96b70f6dbcc724ecc973) | [Tutorial](https://stackedit.io/viewer#!provider=gist&gistId=e2d4f0f0b71f258f3ac9&filename=beirut.md)
-[Chart.js](http://www.chartjs.org/) Line Graph | Tornado Data  | [Andrew's Block](http://bl.ocks.org/andrewxhill/9134155) 
+[Chart.js](http://www.chartjs.org/) Line Graph | Tornado Data  | [Andrew's Block](http://bl.ocks.org/andrewxhill/9134155)
 [Plot.ly](https://plot.ly/) | Earthquake Data  | [Plotly Tutorial](https://plot.ly/ipython-notebooks/cartodb/) | [CartoDB Blog](http://blog.cartodb.com/plotly/)
 
 ### More
@@ -659,10 +682,17 @@ Type | Title | Link/Demo | BlogPost
 	* Tax Allocation Districts
 	* Public vs. Private School distribution
 	* Development districts
-	Watershed management 
+	Watershed management
 	* Bike and Transport Data
 2. [ARC Census Data](http://arc.garc.opendata.arcgis.com/datasets/f37c6a6c451447f8af2693f736cd9044_12)
 3. [Georgia County Polygons](http://arc.garc.opendata.arcgis.com/datasets/dc20713282734a73abe990995de40497_68)
+
+##Visualization
+1. [Charting Tools Repository](https://github.com/auremoser/chart-tools)
+2. [Workshops @CartoDB](http://cartodb.github.io/training/)
+3. [Recommended tools for visualizations](http://selection.datavisualization.ch/)
+4. [Perception concerns](https://github.com/tmcw/perception)
+5. [Colorbrewer](http://colorbrewer2.org/) or [Geocolor](http://geocolor.io/)
 
 
 My contact: [aurelia@cartodb.com](mailto:aurelia@cartodb.com)
